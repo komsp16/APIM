@@ -1,0 +1,28 @@
+<policies>
+  <inbound>
+    <base />
+  </inbound>
+
+  <backend>
+    <base />
+  </backend>
+
+  <outbound>
+    <base />
+
+    <!-- Add a custom header for tracing -->
+    <set-header name="x-apim-demo" exists-action="override">
+      <value>MovieCatalog-APIM</value>
+    </set-header>
+
+    <!-- Remove backend server header (hide internal tech stack) -->
+    <set-header name="Server" exists-action="delete" />
+
+    <!-- Enable response caching for 60 seconds -->
+    <cache-store duration="60" />
+  </outbound>
+
+  <on-error>
+    <base />
+  </on-error>
+</policies>

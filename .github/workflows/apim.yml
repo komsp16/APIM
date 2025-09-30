@@ -47,9 +47,25 @@ jobs:
           API_ID=moviecatalog
 
           echo "Applying inbound policy..."
-          az apim api policy import \
+          az apim api policy set \
             --resource-group $RESOURCE_GROUP \
             --service-name $APIM_NAME \
             --api-id $API_ID \
             --format xml \
-            --path apim/policies/inbound-policy.xml
+            --value @"apim/policies/inbound-policy.xml"
+
+    - name: Apply outbound policy
+      uses: azure/cli@v2
+      with:
+        inlineScript: |
+          APIM_NAME=moviecatalogapim
+          RESOURCE_GROUP=MoviePlatformRG
+          API_ID=moviecatalog
+
+          echo "Applying outbound policy..."
+          az apim api policy set \
+            --resource-group $RESOURCE_GROUP \
+            --service-name $APIM_NAME \
+            --api-id $API_ID \
+            --format xml \
+            --value @"apim/policies/outbound-policy.xml"
