@@ -48,5 +48,6 @@ app.UseHttpsRedirection();
 
 app.MapControllers();
 app.MapHealthChecks("/healthz");
+app.MapGet("/", () => "MovieCatalog API is running via GitHub Actions!");
 
 app.Run();
