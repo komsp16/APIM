@@ -73,10 +73,12 @@ Base URL (after deploy to App Service):
 
     https://moviecatalogapi<yourname>.azurewebsites.net
 
-Example endpoints: - `GET /api/movies` → List all movies -
-`GET /api/movies/{id}` → Get movie by ID - `POST /api/movies` → Create
-new movie - `PUT /api/movies/{id}` → Update movie -
-`DELETE /api/movies/{id}` → Delete movie
+Example endpoints: 
+- `GET /api/movies` → List all movies 
+- `GET /api/movies/{id}` → Get movie by ID 
+- `POST /api/movies` → Create new movie 
+- `PUT /api/movies/{id}` → Update movie 
+- `DELETE /api/movies/{id}` → Delete movie
 
 Swagger UI: `/swagger`
 
@@ -84,11 +86,13 @@ Swagger UI: `/swagger`
 
 ## 🛡️ APIM Features
 
-After importing the API into APIM: - Apply **policies**: - Rate limiting
-(`<rate-limit calls="5" renewal-period="60"/>`) - Header validation
-(`<check-header name="x-client-id" .../>`) - Response caching - Secure
-with **Azure AD / OAuth2** or **subscription keys** - Monitor with
-**Application Insights**
+After importing the API into APIM: 
+- Apply **policies**: 
+    - Rate limiting (`<rate-limit calls="5" renewal-period="60"/>`) 
+    - Header validation (`<check-header name="x-client-id" .../>`) 
+- Response caching 
+- Secure with **Azure AD / OAuth2** or **subscription keys** 
+- Monitor with **Application Insights**
 
 ------------------------------------------------------------------------
 
