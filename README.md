@@ -106,7 +106,6 @@ flowchart LR
     APIM --> DevPortal[Developer Portal]
 ```
 
-
 ------------------------------------------------------------------------
 
 ## 📜 License
