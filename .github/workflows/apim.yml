@@ -1,0 +1,55 @@
+name: Sync APIM Configuration
+
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+      - 'apim/**'        # Only runs when APIM config changes
+  workflow_dispatch:      # Can also run manually
+
+jobs:
+  deploy-apim:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v4
+
+    - name: Login to Azure
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - name: Deploy APIM configuration
+      uses: azure/cli@v2
+      with:
+        inlineScript: |
+          # Replace with your APIM instance name
+          APIM_NAME=moviecatalogapim
+          RESOURCE_GROUP=MoviePlatformRG
+          
+          echo "Deploying APIM configuration from /apim folder..."
+          az apim api import \
+            --resource-group $RESOURCE_GROUP \
+            --service-name $APIM_NAME \
+            --path moviecatalog \
+            --specification-format OpenApi \
+            --specification-path apim/moviecatalog-swagger.json \
+            --api-id moviecatalog \
+            --api-type http
+
+    - name: Apply inbound policy
+      uses: azure/cli@v2
+      with:
+        inlineScript: |
+          APIM_NAME=moviecatalogapim
+          RESOURCE_GROUP=MoviePlatformRG
+          API_ID=moviecatalog
+
+          echo "Applying inbound policy..."
+          az apim api policy import \
+            --resource-group $RESOURCE_GROUP \
+            --service-name $APIM_NAME \
+            --api-id $API_ID \
+            --format xml \
+            --path apim/policies/inbound-policy.xml
