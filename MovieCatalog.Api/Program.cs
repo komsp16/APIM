@@ -48,6 +48,6 @@ app.UseHttpsRedirection();
 
 app.MapControllers();
 app.MapHealthChecks("/healthz");
-app.MapGet("/", () => "MovieCatalog API is running via GitHub Actions & APIM changes are updating via custom APIM workflow!"); ");
+app.MapGet("/", () => "MovieCatalog API is running via GitHub Actions & APIM changes are updating via custom APIM workflow!");
 
 app.Run();
