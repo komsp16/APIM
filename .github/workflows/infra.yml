@@ -1,0 +1,27 @@
+name: Provision Infrastructure
+
+on:
+  workflow_dispatch:   # Run manually when you need infra
+
+jobs:
+  deploy-infra:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v4
+
+    - name: Login to Azure
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - name: Deploy Bicep (App Service + APIM)
+      uses: azure/cli@v2
+      with:
+        inlineScript: |
+          az group create -n MoviePlatformRG -l australiaeast
+          az deployment group create \
+            --resource-group MoviePlatformRG \
+            --template-file infra/main.bicep \
+            --parameters webAppName=moviecatalogapi${{ github.actor }}
