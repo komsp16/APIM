@@ -1,0 +1,35 @@
+<policies>
+  <inbound>
+    <base />
+
+    <!-- Require client-id header -->
+    <check-header name="x-client-id"
+                  failed-check-httpcode="401"
+                  failed-check-error-message="Missing required header: x-client-id" />
+
+    <!-- Rate limit: max 5 calls per 60 seconds per subscription key -->
+    <rate-limit calls="5" renewal-period="60" />
+
+    <!-- Log inbound request for debugging -->
+    <log-to-eventhub logger-id="apim-logger">
+      @{
+        "message": "Inbound request received",
+        "url": context.Request.Url,
+        "method": context.Request.Method,
+        "headers": context.Request.Headers
+      }
+    </log-to-eventhub>
+  </inbound>
+
+  <backend>
+    <base />
+  </backend>
+
+  <outbound>
+    <base />
+  </outbound>
+
+  <on-error>
+    <base />
+  </on-error>
+</policies>
