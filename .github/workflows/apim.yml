@@ -34,7 +34,7 @@ jobs:
             --service-name $APIM_NAME \
             --path moviecatalog \
             --specification-format OpenApi \
-            --specification-path apim/moviecatalog-swagger.json \
+            --specification-path apim/moviecatalog-swagger-v1.json \
             --api-id moviecatalog \
             --api-type http
 
