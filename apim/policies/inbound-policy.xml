@@ -8,7 +8,7 @@
                   failed-check-error-message="Missing required header: x-client-id" />
 
     <!-- Rate limit: max 5 calls per 60 seconds per subscription key -->
-    <rate-limit calls="5" renewal-period="60" />
+    <rate-limit calls="10" renewal-period="60" />
 
     <!-- Log inbound request for debugging -->
     <log-to-eventhub logger-id="apim-logger">
